@@ -11,7 +11,7 @@ public interface Me2Day extends ApiBinding {
      * 글 관련 기능
      * @return
      */
-    ArticleOperations articleOperations();
+    PostOperations articleOperations();
 
     /**
      * 댓글 관련 기능
