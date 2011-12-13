@@ -50,7 +50,7 @@ public class ProtectedResourceClientFactory {
             } catch (Exception shouldntHappen) {}
         } else {
             // 3.0.x compatibility
-            client.setRequestFactory(new Spring30OAuth2RequestFactory(client.getRequestFactory(), me2DayCridential));
+            client.setRequestFactory(new Spring30Me2DayAuthRequestFactory(client.getRequestFactory(), me2DayCridential));
         }
         return client;
     }
@@ -59,7 +59,7 @@ public class ProtectedResourceClientFactory {
         if (interceptorsSupported) {
             return requestFactory;
         }
-        return new Spring30OAuth2RequestFactory(requestFactory, me2DayCridential);
+        return new Spring30Me2DayAuthRequestFactory(requestFactory, me2DayCridential);
     }
 
 }

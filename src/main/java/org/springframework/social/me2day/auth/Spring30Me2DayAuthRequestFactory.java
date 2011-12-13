@@ -12,12 +12,12 @@ import java.net.URI;
 /**
  * @author: Keesun Baik
  */
-public class Spring30OAuth2RequestFactory implements ClientHttpRequestFactory {
+public class Spring30Me2DayAuthRequestFactory implements ClientHttpRequestFactory {
     
     private final ClientHttpRequestFactory delegate;
     private final Me2DayCridential me2DayCridential;
     
-    public Spring30OAuth2RequestFactory(ClientHttpRequestFactory delegate, Me2DayCridential me2DayCridential) {
+    public Spring30Me2DayAuthRequestFactory(ClientHttpRequestFactory delegate, Me2DayCridential me2DayCridential) {
         this.delegate = delegate;
         this.me2DayCridential = me2DayCridential;
     }

@@ -37,10 +37,9 @@ public class Me2DayAuthApiBinding implements ApiBinding {
 
     /**
      * Constructs the API template with Me2Day's Auth credential necessary to perform operations on behalf of a user.
-     * @param ukey the access token
      */
-    protected Me2DayAuthApiBinding(String uid, String ukey) {
-        this.me2DayCridential = new Me2DayCridential(uid, ukey);
+    protected Me2DayAuthApiBinding(Me2DayCridential me2DayCridential) {
+        this.me2DayCridential = me2DayCridential;
         restTemplate = ProtectedResourceClientFactory.create(me2DayCridential);
         restTemplate.setMessageConverters(getMessageConverters());
         configureRestTemplate(restTemplate);

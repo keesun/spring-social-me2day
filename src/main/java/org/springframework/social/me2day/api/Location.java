@@ -8,6 +8,8 @@ public class Location {
     String name;
     String longitude;
     String latitude;
+    
+    String timezone;
 
     public String getName() {
         return name;
@@ -31,5 +33,13 @@ public class Location {
 
     public void setLatitude(String latitude) {
         this.latitude = latitude;
+    }
+
+    public String getTimezone() {
+        return timezone;
+    }
+
+    public void setTimezone(String timezone) {
+        this.timezone = timezone;
     }
 }
