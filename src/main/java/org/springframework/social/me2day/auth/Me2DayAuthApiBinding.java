@@ -1,4 +1,4 @@
-package org.springframework.social.me2day.api.impl;
+package org.springframework.social.me2day.auth;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpRequestFactory;
@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class Me2DayAuthApiBinding implements ApiBinding {
 
-    private final String ukey;
+    private final Me2DayCridential me2DayCridential;
 
     private final RestTemplate restTemplate;
 
@@ -29,19 +29,19 @@ public class Me2DayAuthApiBinding implements ApiBinding {
      * Constructs the API template without user authorization. This is useful for accessing operations on a provider's API that do not require user authorization.
      */
     protected Me2DayAuthApiBinding() {
-        ukey = null;
+        me2DayCridential = null;
         restTemplate = new RestTemplate(ClientHttpRequestFactorySelector.getRequestFactory());
         restTemplate.setMessageConverters(getMessageConverters());
         configureRestTemplate(restTemplate);
     }
 
     /**
-     * Constructs the API template with OAuth credentials necessary to perform operations on behalf of a user.
+     * Constructs the API template with Me2Day's Auth credential necessary to perform operations on behalf of a user.
      * @param ukey the access token
      */
-    protected Me2DayAuthApiBinding(String ukey) {
-        this.ukey = ukey;
-        restTemplate = null;//TODO
+    protected Me2DayAuthApiBinding(String uid, String ukey) {
+        this.me2DayCridential = new Me2DayCridential(uid, ukey);
+        restTemplate = ProtectedResourceClientFactory.create(me2DayCridential);
         restTemplate.setMessageConverters(getMessageConverters());
         configureRestTemplate(restTemplate);
     }
@@ -52,7 +52,7 @@ public class Me2DayAuthApiBinding implements ApiBinding {
      */
     public void setRequestFactory(ClientHttpRequestFactory requestFactory) {
         if (isAuthorized()) {
-            restTemplate.setRequestFactory(null); //TODO
+            restTemplate.setRequestFactory(ProtectedResourceClientFactory.addMe2DayAuthParam(requestFactory, me2DayCridential));
         } else {
             restTemplate.setRequestFactory(requestFactory);
         }
@@ -70,6 +70,10 @@ public class Me2DayAuthApiBinding implements ApiBinding {
      */
     public RestTemplate getRestTemplate() {
         return restTemplate;
+    }
+
+    public Me2DayCridential getMe2DayCridential() {
+        return me2DayCridential;
     }
 
     // subclassing hooks
@@ -134,6 +138,7 @@ public class Me2DayAuthApiBinding implements ApiBinding {
     
     @Override
     public boolean isAuthorized() {
-        return ukey != null;
+        return me2DayCridential != null;
     }
+
 }

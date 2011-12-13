@@ -9,4 +9,6 @@ public interface PostOperations {
 
     List<Post> getPosts(String userId);
 
+    Post createPost(Post post);
+
 }
