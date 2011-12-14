@@ -15,13 +15,16 @@ public class Me2DayAdapter implements ApiAdapter<Me2Day> {
 
     @Override
     public boolean test(Me2Day api) {
-        //TODO use nope
-        return false;
+        return true;
     }
 
     @Override
     public void setConnectionValues(Me2Day api, ConnectionValues values) {
-//        Person person = api.userOperations().getPerson();
+        Person codian = api.userOperations().getPerson("codian");
+        values.setDisplayName(codian.getNickname());
+        values.setImageUrl(codian.getFace());
+        values.setProfileUrl(codian.getMe2dayHome());
+        values.setProviderUserId(codian.getId());
     }
 
     @Override

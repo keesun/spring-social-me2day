@@ -22,7 +22,7 @@ public class Person {
     Date birthday;
     Location location;
     Celebrity celebrity;
-    String me2dayHOme;
+    String me2dayHome;
     String rssDaily;
     String invitedBy;
     int friendsCount;
@@ -145,12 +145,12 @@ public class Person {
         this.celebrity = celebrity;
     }
 
-    public String getMe2dayHOme() {
-        return me2dayHOme;
+    public String getMe2dayHome() {
+        return me2dayHome;
     }
 
-    public void setMe2dayHOme(String me2dayHOme) {
-        this.me2dayHOme = me2dayHOme;
+    public void setMe2dayHome(String me2dayHome) {
+        this.me2dayHome = me2dayHome;
     }
 
     public String getRssDaily() {
